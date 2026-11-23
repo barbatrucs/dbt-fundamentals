@@ -1,0 +1,18 @@
+models:
+  - name: stg_stripe_payments
+    description: one unique payment per row
+    columns:
+      - name: payment_id
+        description: Primary key for payment
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: foreign key with orders
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_jaffle_shop_orders')
+                field: order_id
+      - name: payment_method
+        description: '{{ doc("payment_method") }}'
